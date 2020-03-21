@@ -1,5 +1,5 @@
 @import "form";
-
+@import "movie";
 body {
   margin: 0;
   background: #303030;
@@ -20,4 +20,9 @@ footer {
       color: white;
     }
   }
+}
+
+.home-toolbar{
+  display: flex;
+  justify-content: space-between;
 }

@@ -1,0 +1,8 @@
+<div class="poster">
+  <div class="rating"><em class="fas fa-star"></em>{{movie.vote_average}}</div>
+  <div class="watch-later"><em class="fas fa-plus-circle"></em></div>
+  <img [src]="environment.image200Url + movie.poster_path" alt="">
+  <div class="overlay mat-elevation-z5">
+    <p class="name">{{movie.title}}</p>
+  </div>
+</div>
