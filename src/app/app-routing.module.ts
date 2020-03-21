@@ -1,8 +1,9 @@
-import { AccountComponent } from './layouts/account/account.component';
-import { AuthorizationComponent } from './layouts/authorization/authorization.component';
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { DefaultComponent } from './layouts/default/default.component';
+import {AccountComponent} from './layouts/account/account.component';
+import {AuthorizationComponent} from './layouts/authorization/authorization.component';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
+import {DefaultComponent} from './layouts/default/default.component';
+import {FireAuthGuard} from './guards/fire-auth.guard';
 
 const routes: Routes = [
   {
@@ -33,10 +34,11 @@ const routes: Routes = [
   {
     path: 'account',
     component: AccountComponent,
+    canActivate: [FireAuthGuard],
     children: [
       {
         path: 'dashboard',
-        loadChildren: () => import('./views/landing/landing.module').then(m => m.LandingModule)
+        loadChildren: () => import('./views/account/account.module').then(m => m.AccountModule)
       },
     ]
   }
@@ -46,4 +48,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
