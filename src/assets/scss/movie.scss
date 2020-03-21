@@ -1,3 +1,5 @@
+$star: #f5c518;
+
 .movie-grid{
   padding: 5em;
   display: grid;
@@ -18,7 +20,7 @@
     left: 10px;
     color: white;
     em{
-      color: #f5c518;
+      color: $star;
       padding-right: 1em;
     }
   }
@@ -51,4 +53,27 @@
     font-size: 1rem;
   }
 
+}
+
+.movie-details{
+
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-areas: "poster title" "poster content" "poster content";
+
+gap: 1em;
+  &__poster{
+    grid-area: poster;
+  }
+
+  &__title{
+    grid-area: title;
+    em{
+      color: $star;
+    }
+  }
+
+  &__content{
+    grid-area: content;
+  }
 }
