@@ -1,9 +1,30 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {AuthService} from '../auth/auth.service';
+import {MoviesResponse} from '../../models/movie';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
 
-  constructor() { }
+  constructor(private firestore: AngularFirestore, private authService: AuthService) {
+  }
+
+  getWishList() {
+    return this.firestore.collection(this.authService.userData.uid).snapshotChanges();
+  }
+
+  createWishList(movie: MoviesResponse) {
+    return this.firestore.collection(this.authService.userData.uid).add(movie);
+  }
+
+  updateWishList(movie: MoviesResponse) {
+    delete movie.id;
+    return this.firestore.doc(this.authService.userData.uid + '/' + movie.id).update(movie);
+  }
+
+  deleteWishList(movieId: string) {
+    return this.firestore.doc(this.authService.userData.uid + '/'  + movieId).delete();
+  }
 }
