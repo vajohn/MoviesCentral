@@ -1,0 +1,9 @@
+<div class="poster" >
+  <div class="rating"><em class="fas fa-star"></em>{{movie.vote_average}}</div>
+  <div class="watch-later"><em class="fas fa-plus-circle" (click)="watchLater(movie)"></em></div>
+  <div class="watch-later-remove"><em class="fas fa-minus-circle" (click)="watchRemoveLater(movie)"></em></div>
+  <img  [src]="environment.image200Url + movie.poster_path" alt="">
+  <div  (click)="openDetails(movie)"  class="overlay mat-elevation-z5">
+    <p class="name">{{movie.title}}</p>
+  </div>
+</div>

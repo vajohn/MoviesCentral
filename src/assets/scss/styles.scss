@@ -1,5 +1,5 @@
 @import "form";
-
+@import "movie";
 body {
   margin: 0;
   background: #303030;
@@ -19,5 +19,19 @@ footer {
       text-decoration: none;
       color: white;
     }
+  }
+}
+
+.home-toolbar{
+  display: flex;
+  justify-content: space-between;
+}
+.menu-spacer{
+  flex: 1 1 auto;
+}
+.sidenav-container {
+  height: 92vh;
+  .sidenav{
+    width: 300px;
   }
 }

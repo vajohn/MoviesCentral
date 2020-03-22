@@ -1,0 +1,86 @@
+$star: #f5c518;
+$bottom: 15px;
+.movie-grid{
+  padding: 5em;
+  display: grid;
+  gap: 1em;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  .poster {
+    overflow: hidden;
+    position: relative;
+    display: block;
+    height: 310px;
+    img{
+      border-radius: 6.8px;
+    }
+  }
+  .rating{
+    position: absolute;
+    bottom: $bottom;
+    left: 10px;
+    color: white;
+    em{
+      color: $star;
+      padding-right: 1em;
+    }
+  }
+  .watch-later{
+    position: absolute;
+    bottom: $bottom;
+    left: 175px;
+    color: white;
+    z-index: 2;
+  }
+  .watch-later-remove{
+    position: absolute;
+    bottom: $bottom;
+    left: 100px;
+    color: white;
+    z-index: 2;
+  }
+  .overlay{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 6.8px;
+    height: 300px;
+    width: 200px;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  .name {
+    position: absolute;
+
+    left: 0;
+    padding: 5px;
+    color: #fff;
+    text-align: center;
+    font-weight: 400;
+    font-size: 1rem;
+  }
+
+}
+
+.movie-details{
+
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-areas: "poster title" "poster content" "poster content";
+
+gap: 1em;
+  &__poster{
+    grid-area: poster;
+  }
+
+  &__title{
+    grid-area: title;
+    em{
+      color: $star;
+    }
+  }
+
+  &__content{
+    grid-area: content;
+  }
+}

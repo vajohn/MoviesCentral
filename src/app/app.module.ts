@@ -13,6 +13,8 @@ import { AuthorizationComponent } from './layouts/authorization/authorization.co
 import { DefaultComponent } from './layouts/default/default.component';
 import { AccountComponent } from './layouts/account/account.component';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {DefaultInterceptor} from './services/interceptors/default.service';
 
 const APPLAYOUTS = [
   AuthorizationComponent,
@@ -32,12 +34,18 @@ const APPLAYOUTS = [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    HttpClientModule
   ],
   providers: [
     {
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: DefaultInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

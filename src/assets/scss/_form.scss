@@ -1,10 +1,15 @@
 .center-card {
   max-width: 400px;
   margin: 0 auto;
+  &.search{
+    margin-bottom: 2em;
+  }
 }
 .two-grid-form{
   display: grid;
 }
-.actions-spacer{
+.search-form{
+display: grid;
 
+gap: 1em;
 }

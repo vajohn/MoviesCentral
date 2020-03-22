@@ -1,9 +1,11 @@
-<mat-toolbar  color="primary">
-  <mat-icon class="example-icon" aria-hidden="false" aria-label="home icon">home</mat-icon>
-  <button mat-button routerLink="/authorization/user/sign-in">Sign in</button>
-  <button mat-button>Basic</button>
-  <button mat-button>Basic</button>
+<mat-toolbar class="home-toolbar" color="primary">
+  <div>
+    <em class="fas fa-film"></em>
+    Movie Central
+    <em class="fas fa-film"></em>
+  </div>
+  <button *ngIf="authService.currentUserValue === null" mat-button routerLink="/authorization/user/sign-in">Sign in</button>
+  <button *ngIf="authService.currentUserValue !== null" mat-button routerLink="/account/dashboard/wish-list">Wish list</button>
 </mat-toolbar>
+<mat-progress-bar *ngIf="loader?.loading" mode="indeterminate"></mat-progress-bar>
 <router-outlet></router-outlet>
-
-

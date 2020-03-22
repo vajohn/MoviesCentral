@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../services/auth/auth.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {LoaderBarService} from '../../../services/loader/loader-bar.service';
 
 @Component({
   selector: 'mc-sign-in',
@@ -15,13 +16,12 @@ export class SignInComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private formBuilder: FormBuilder,
+    private loaderBarService: LoaderBarService
   ) {
   }
 
   ngOnInit(): void {
     this.setForm();
-    console.log( this.authService.userData.uid);
-
   }
 
   get form() {
@@ -42,7 +42,7 @@ export class SignInComponent implements OnInit {
     if (this.signInForm.invalid) {
       return;
     }
-
-    this.authService.SignIn(this.form.userName.value, this.form.userPassword.value).then(d => console.log(d));
+    this.loaderBarService.show();
+    this.authService.SignIn(this.form.userName.value, this.form.userPassword.value).then(() => this.loaderBarService.show());
   }
 }

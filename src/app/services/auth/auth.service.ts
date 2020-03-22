@@ -4,12 +4,15 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {Router} from '@angular/router';
 import {User} from '../../models/user';
 import {auth} from 'firebase/app';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  public userData: any;
+  public userData: User;
+  private currentUserSubject: BehaviorSubject<User>;
+  public currentUser: Observable<User>;
 
   constructor(
     public angularFirestore: AngularFirestore,
@@ -17,15 +20,17 @@ export class AuthService {
     public router: Router,
     public ngZone: NgZone
   ) {
+    this.currentUserSubject = new BehaviorSubject<User>(this.getDecodedUserInfo());
+    this.currentUser = this.currentUserSubject.asObservable();
 
     this.angularFireAuth.authState.subscribe(user => {
       if (user) {
         this.userData = user;
-        localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user'));
+        sessionStorage.setItem('user', JSON.stringify(this.userData));
+        JSON.parse(sessionStorage.getItem('user'));
       } else {
-        localStorage.setItem('user', null);
-        JSON.parse(localStorage.getItem('user'));
+        sessionStorage.setItem('user', null);
+        JSON.parse(sessionStorage.getItem('user'));
       }
     });
   }
@@ -34,10 +39,10 @@ export class AuthService {
   SignIn(email, password) {
     return this.angularFireAuth.auth.signInWithEmailAndPassword(email, password)
       .then((result) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['/']);
-        });
+
         this.SetUserData(result.user);
+        this.currentUserSubject.next(this.getDecodedUserInfo());
+        this.router.navigate(['/account/dashboard']);
       }).catch((error) => {
         window.alert(error.message);
       });
@@ -72,12 +77,6 @@ export class AuthService {
       }).catch((error) => {
         window.alert(error);
       });
-  }
-
-  // Returns true when user is logged in and email is verified
-  get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user'));
-    return (user !== null && user.emailVerified !== false) ? true : false;
   }
 
   // Sign in with Google
@@ -123,9 +122,21 @@ export class AuthService {
   // Sign out
   SignOut() {
     return this.angularFireAuth.auth.signOut().then(() => {
-      localStorage.removeItem('user');
-      this.router.navigate(['sign-in']);
+      sessionStorage.removeItem('user');
+      this.router.navigate(['/authorization/user/sign-in']);
     });
   }
 
+  public get currentUserValue(): User {
+    return this.currentUserSubject.value;
+  }
+
+  public getDecodedUserInfo(): User {
+    try {
+      return JSON.parse(sessionStorage.getItem('user'));
+    } catch (Error) {
+
+      return null;
+    }
+  }
 }

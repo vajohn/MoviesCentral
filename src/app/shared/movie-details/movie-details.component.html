@@ -1,0 +1,15 @@
+<section class="movie-details">
+  <img  class="movie-details__poster" [src]="environment.image200Url + data.poster_path" [alt]="data.title">
+  <div class="movie-details__title">
+    <h1>{{data.title}}</h1>
+    <h3> {{data.adult ? 'Adult' :'PG'}} | {{findGenres(data.genre_ids)}} | {{data.release_date}} | {{data.original_language}}</h3>
+    <p><em class="fas fa-star"></em> {{data.vote_average}} |  <em class="fas fa-grin-stars"></em> {{data.vote_count}}</p>
+
+  </div>
+  <div class="movie-details__content">
+    <p>
+      {{data.overview}}
+    </p>
+  </div>
+</section>
+
