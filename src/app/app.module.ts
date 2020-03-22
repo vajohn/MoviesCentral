@@ -13,6 +13,7 @@ import { AuthorizationComponent } from './layouts/authorization/authorization.co
 import { DefaultComponent } from './layouts/default/default.component';
 import { AccountComponent } from './layouts/account/account.component';
 import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+import {HttpClientModule} from '@angular/common/http';
 
 const APPLAYOUTS = [
   AuthorizationComponent,
@@ -32,6 +33,7 @@ const APPLAYOUTS = [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    HttpClientModule
   ],
   providers: [
     {

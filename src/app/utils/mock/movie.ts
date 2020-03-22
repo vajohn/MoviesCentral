@@ -1,5 +1,12 @@
 import {MovieListResponse} from '../../models/movie';
 
+export const moviesDefaultData: MovieListResponse = {
+  page: 1,
+  total_results: 1,
+  total_pages: 1,
+  results: []
+};
+
 export const moviesMockData: MovieListResponse = {
   page: 1,
   total_results: 10000,

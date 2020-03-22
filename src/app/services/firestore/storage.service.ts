@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AuthService} from '../auth/auth.service';
 import {MoviesResponse} from '../../models/movie';
+import {catchError, map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,14 @@ export class StorageService {
   }
 
   getWishList() {
-    return this.firestore.collection(this.authService.userData.uid).snapshotChanges();
+    return this.firestore.collection(this.authService.userData.uid)
+      .snapshotChanges()
+      .pipe(
+        map(response => {
+          return response.map(e => e.payload.doc.data()) as MoviesResponse[];
+        }),
+        catchError(err => err)
+      );
   }
 
   createWishList(movie: MoviesResponse) {

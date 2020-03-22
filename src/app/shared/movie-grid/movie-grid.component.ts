@@ -9,11 +9,17 @@ import {MovieListResponse, MoviesResponse} from '../../models/movie';
 export class MovieGridComponent implements OnInit {
   @Input() coreData: MoviesResponse[];
   @Input() movieData: MovieListResponse;
-  @Output() next = new EventEmitter<boolean>();
-  constructor() { }
+  @Output() next = new EventEmitter<number>();
+
+  constructor() {
+  }
 
   ngOnInit(): void {
 
   }
 
+  getPaginatorData(event) {
+    console.log(event.pageIndex + 1);
+    this.next.next(event.pageIndex + 1);
+  }
 }

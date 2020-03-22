@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MovieListResponse} from '../../../models/movie';
-import {moviesMockData} from '../../../utils/mock/movie';
+import {moviesDefaultData} from '../../../utils/mock/movie';
 import {MovieDatabaseService} from '../../../services/movies/moviedatabase.service';
 
 @Component({
@@ -10,7 +10,7 @@ import {MovieDatabaseService} from '../../../services/movies/moviedatabase.servi
 })
 export class WelcomeComponent implements OnInit {
   currentPage = 1;
-  requestedMovies: MovieListResponse;
+  requestedMovies: MovieListResponse = moviesDefaultData;
 
   constructor(
     private movieDatabaseService: MovieDatabaseService
@@ -21,11 +21,14 @@ export class WelcomeComponent implements OnInit {
     this.getMovies();
   }
 
-  onPageSelected(agreed: boolean) {
-    agreed ? this.currentPage++ : this.currentPage--;
+  onPageSelected(agreed: number) {
+    this.currentPage = agreed;
+    console.log('change to ', this.currentPage);
   }
 
   private getMovies() {
-    this.requestedMovies = moviesMockData;
+    this.movieDatabaseService.getAllPopular().subscribe((result: MovieListResponse) =>
+      this.requestedMovies = result
+    );
   }
 }

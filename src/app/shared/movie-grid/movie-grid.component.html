@@ -1,3 +1,6 @@
+<mat-paginator [length]="movieData.total_results" [hidePageSize]="true" [pageIndex]="movieData.page - 1" (page)="getPaginatorData($event)">
+</mat-paginator>
 <section  class="movie-grid">
+
   <mc-movie *ngFor="let movie of coreData" [movie]="movie"></mc-movie>
 </section>

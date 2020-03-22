@@ -37,22 +37,17 @@ export class MovieComponent implements OnInit {
 
   watchLater(movie: MoviesResponse) {
     if (this.authService.userData !== undefined) {
-      this.storageService.getWishList().subscribe(response => {
-        const firestoreData: MoviesResponse[] = response.map(e => e.payload.doc.data()) as MoviesResponse[];
-        if (firestoreData.some(data => data.id === movie.id)) {
+      this.storageService.getWishList().subscribe((response: MoviesResponse[]) => {
+        if (response.some(data => data.id === movie.id)) {
           this.snackBar.open(`${movie.title} already in watch later list`, 'Dismiss', {
             duration: 2000
           });
         } else {
-
           this.storageService.createWishList(movie).then(() => this.snackBar
             .open(`${movie.title} added to watch later list`, 'Dismiss', {
               duration: 2000
             }));
-
         }
-
-
       });
     }
     if (this.authService.userData === undefined) {
