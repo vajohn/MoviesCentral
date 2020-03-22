@@ -19,7 +19,6 @@ export class MovieGridComponent implements OnInit {
   }
 
   getPaginatorData(event) {
-    console.log(event.pageIndex + 1);
     this.next.next(event.pageIndex + 1);
   }
 }

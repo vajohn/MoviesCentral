@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {LoaderBarService} from '../../services/loader/loader-bar.service';
+import {AuthService} from '../../services/auth/auth.service';
 
 @Component({
   selector: 'mc-default',
@@ -8,9 +9,9 @@ import {LoaderBarService} from '../../services/loader/loader-bar.service';
 })
 export class DefaultComponent implements OnInit {
 
-  constructor(public loader: LoaderBarService) { }
+  constructor(public loader: LoaderBarService, public authService: AuthService) { }
 
   ngOnInit(): void {
-  }
+  console.log('done', this.authService.currentUserValue);  }
 
 }

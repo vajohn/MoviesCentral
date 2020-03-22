@@ -17,8 +17,8 @@ export class FireAuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.authService.isLoggedIn !== true) {
-      this.router.navigate(['sign-in']);
+    if (this.authService.currentUserValue === null) {
+      this.router.navigate(['/authorization/user/sign-in']);
     }
     return true;
   }

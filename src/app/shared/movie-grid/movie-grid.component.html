@@ -1,4 +1,4 @@
-<mat-paginator [length]="movieData.total_results" [hidePageSize]="true" [pageIndex]="movieData.page - 1" (page)="getPaginatorData($event)">
+<mat-paginator *ngIf="movieData !== undefined" [length]="movieData.total_results" [hidePageSize]="true" [pageIndex]="movieData.page - 1" (page)="getPaginatorData($event)">
 </mat-paginator>
 <section  class="movie-grid">
 

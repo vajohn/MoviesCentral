@@ -4,9 +4,8 @@
     Movie Central
     <em class="fas fa-film"></em>
   </div>
-  <button mat-button routerLink="/authorization/user/sign-in">Sign in</button>
+  <button *ngIf="authService.currentUserValue === null" mat-button routerLink="/authorization/user/sign-in">Sign in</button>
+  <button *ngIf="authService.currentUserValue !== null" mat-button routerLink="/account/dashboard/wish-list">Wish list</button>
 </mat-toolbar>
-<mat-progress-bar *ngIf="loader.loading" mode="indeterminate"></mat-progress-bar>
+<mat-progress-bar *ngIf="loader?.loading" mode="indeterminate"></mat-progress-bar>
 <router-outlet></router-outlet>
-
-

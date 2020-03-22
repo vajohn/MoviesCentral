@@ -13,7 +13,7 @@ export class StorageService {
   }
 
   getWishList() {
-    return this.firestore.collection(this.authService.userData.uid)
+    return this.firestore.collection(this.authService.currentUserValue.uid)
       .snapshotChanges()
       .pipe(
         map(response => {
@@ -24,15 +24,15 @@ export class StorageService {
   }
 
   createWishList(movie: MoviesResponse) {
-    return this.firestore.collection(this.authService.userData.uid).add(movie);
+    return this.firestore.collection(this.authService.currentUserValue.uid).add(movie);
   }
 
   updateWishList(movie: MoviesResponse) {
     delete movie.id;
-    return this.firestore.doc(this.authService.userData.uid + '/' + movie.id).update(movie);
+    return this.firestore.doc(this.authService.currentUserValue.uid + '/' + movie.id).update(movie);
   }
 
   deleteWishList(movieId: string) {
-    return this.firestore.doc(this.authService.userData.uid + '/'  + movieId).delete();
+    return this.firestore.doc(this.authService.currentUserValue.uid + '/'  + movieId).delete();
   }
 }
