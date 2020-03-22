@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {LoaderBarService} from '../../services/loader/loader-bar.service';
 
 @Component({
   selector: 'mc-default',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DefaultComponent implements OnInit {
 
-  constructor() { }
+  constructor(public loader: LoaderBarService) { }
 
   ngOnInit(): void {
   }

@@ -6,6 +6,7 @@
   </div>
   <button mat-button routerLink="/authorization/user/sign-in">Sign in</button>
 </mat-toolbar>
+<mat-progress-bar *ngIf="loader.loading" mode="indeterminate"></mat-progress-bar>
 <router-outlet></router-outlet>
 
 

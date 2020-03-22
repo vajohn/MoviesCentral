@@ -23,7 +23,10 @@ export class WelcomeComponent implements OnInit {
 
   onPageSelected(agreed: number) {
     this.currentPage = agreed;
-    console.log('change to ', this.currentPage);
+    console.log('change ', this.currentPage);
+    this.movieDatabaseService.getAllPopular(this.currentPage).subscribe((result: MovieListResponse) =>
+      this.requestedMovies = result
+    );
   }
 
   private getMovies() {

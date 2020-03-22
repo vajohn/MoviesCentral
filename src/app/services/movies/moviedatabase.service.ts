@@ -23,7 +23,7 @@ export class MovieDatabaseService {
 
   getAllSearched(pages = 1, searchValue: string) {
     const param = {api_key: environment.apiKey, page: pages.toString(), query: searchValue};
-    return this.http.get<MovieListResponse>(`${environment.baseUrl}movie/popular`, {params: param})
+    return this.http.get<MovieListResponse>(`${environment.baseUrl}search/movie`, {params: param})
       .pipe(
         map(result => result),
         catchError(err => err)
