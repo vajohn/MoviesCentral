@@ -1,3 +1,20 @@
 <h1 style="color: white; text-align: center">Just a better place to plan your movie binge</h1>
 
+<mat-card class="center-card search">
+  <form [formGroup]="searchForm" (ngSubmit)="search()"  class="search-form">
+    <mat-form-field class="two-grid-form">
+      <mat-label>Enter keywords here</mat-label>
+      <label>
+        <input matInput formControlName="searchTerm" placeholder="home">
+      </label>
+      <mat-error *ngIf="submitted && form.searchTerm.errors">
+        <p *ngIf="form.searchTerm.errors.required">
+          Please enter search
+        </p>
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit"><em class="fas fa-search"></em> Search</button>
+  </form>
+</mat-card>
+
 <mc-movie-grid [coreData]="requestedMovies.results" [movieData]="requestedMovies" (next)="onPageSelected($event)"></mc-movie-grid>

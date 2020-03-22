@@ -1,5 +1,5 @@
 $star: #f5c518;
-
+$bottom: 15px;
 .movie-grid{
   padding: 5em;
   display: grid;
@@ -16,7 +16,7 @@ $star: #f5c518;
   }
   .rating{
     position: absolute;
-    bottom: 10px;
+    bottom: $bottom;
     left: 10px;
     color: white;
     em{
@@ -26,8 +26,15 @@ $star: #f5c518;
   }
   .watch-later{
     position: absolute;
-    bottom: 10px;
-    left: 180px;
+    bottom: $bottom;
+    left: 175px;
+    color: white;
+    z-index: 2;
+  }
+  .watch-later-remove{
+    position: absolute;
+    bottom: $bottom;
+    left: 100px;
     color: white;
     z-index: 2;
   }

@@ -11,6 +11,7 @@ export interface MoviesResponse {
   video: boolean;
   poster_path?: string;
   id: number;
+  firebaseId?: string;
   adult: boolean;
   backdrop_path?: string;
   original_language: string;

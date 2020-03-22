@@ -17,7 +17,13 @@ export class StorageService {
       .snapshotChanges()
       .pipe(
         map(response => {
-          return response.map(e => e.payload.doc.data()) as MoviesResponse[];
+          const result = response.map(e => e.payload.doc.data()) as MoviesResponse[];
+          const ids = response.map(e => e.payload.doc.id);
+          console.log('fireIds', ids);
+          result.forEach((data, index) => {
+            result[index].firebaseId = ids[index];
+          });
+          return result;
         }),
         catchError(err => err)
       );

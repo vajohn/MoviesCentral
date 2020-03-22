@@ -58,4 +58,25 @@ export class MovieComponent implements OnInit {
       this.snackBar._openedSnackBarRef.onAction().subscribe(() => this.router.navigateByUrl('/authorization/user/sign-in'));
     }
   }
+
+  watchRemoveLater(movie: MoviesResponse) {
+
+    if (this.authService.userData !== undefined) {
+      this.storageService.getWishList().subscribe((response: MoviesResponse[]) => {
+        if (response.some(data => data.id === movie.id)) {
+          this.storageService.deleteWishList(movie.firebaseId).then(() => this.snackBar
+            .open(`${movie.title} deleted from watch later list`, 'Dismiss', {
+              duration: 2000
+            }));
+        }
+      });
+    }
+    if (this.authService.userData === undefined) {
+      this.snackBar.open('Please ', 'Sign In', {
+        duration: 6000
+      });
+
+      this.snackBar._openedSnackBarRef.onAction().subscribe(() => this.router.navigateByUrl('/authorization/user/sign-in'));
+    }
+  }
 }
