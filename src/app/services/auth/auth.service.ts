@@ -97,6 +97,7 @@ export class AuthService {
           this.router.navigate(['/']);
         });
         this.SetUserData(result.user);
+        this.currentUserSubject.next(this.getDecodedUserInfo());
       }).catch((error) => {
         window.alert(error);
       });
