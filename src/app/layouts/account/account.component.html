@@ -10,7 +10,7 @@
     </div>
     <span class="menu-spacer"></span>
     <div>
-      <span >Welcome {{authService?.currentUserValue?.email || authService?.userData?.email}}</span>
+      <span >Welcome {{authService?.currentUserValue?.displayName || authService?.userData?.email}}</span>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
