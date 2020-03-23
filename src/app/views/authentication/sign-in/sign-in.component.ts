@@ -43,6 +43,8 @@ export class SignInComponent implements OnInit {
       return;
     }
     this.loaderBarService.show();
-    this.authService.SignIn(this.form.userName.value, this.form.userPassword.value).then(() => this.loaderBarService.show());
+    this.authService.SignIn(this.form.userName.value, this.form.userPassword.value)
+      .then(() => this.loaderBarService.show())
+      .finally( () => this.loaderBarService.hide());
   }
 }

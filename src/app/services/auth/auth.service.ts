@@ -39,10 +39,12 @@ export class AuthService {
   SignIn(email, password) {
     return this.angularFireAuth.auth.signInWithEmailAndPassword(email, password)
       .then((result) => {
-
+        this.ngZone.run(() => {
+          this.router.navigate(['/account/dashboard']);
+        });
         this.SetUserData(result.user);
         this.currentUserSubject.next(this.getDecodedUserInfo());
-        this.router.navigate(['/account/dashboard']);
+
       }).catch((error) => {
         window.alert(error.message);
       });
@@ -58,6 +60,7 @@ export class AuthService {
         this.SetUserData(result.user);
       }).catch((error) => {
         window.alert(error.message);
+
       });
   }
 
@@ -93,11 +96,12 @@ export class AuthService {
   AuthLogin(provider) {
     return this.angularFireAuth.auth.signInWithPopup(provider)
       .then((result) => {
+
+        this.SetUserData(result.user);
+        this.currentUserSubject.next(this.getDecodedUserInfo());
         this.ngZone.run(() => {
           this.router.navigate(['/account/dashboard']);
         });
-        this.SetUserData(result.user);
-        this.currentUserSubject.next(this.getDecodedUserInfo());
       }).catch((error) => {
         window.alert(error);
       });

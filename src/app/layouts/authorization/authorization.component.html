@@ -2,7 +2,7 @@
   <router-outlet></router-outlet>
 </main>
 <footer>
-  <mat-progress-bar *ngIf="loader?.loading" mode="indeterminate"></mat-progress-bar>
+  <mat-progress-bar *ngIf="loader.getLoading()" mode="indeterminate"></mat-progress-bar>
   <mat-toolbar class="footer" color="primary">
     <button mat-button routerLink="/">Home</button>
     <button mat-button>

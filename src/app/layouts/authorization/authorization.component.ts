@@ -7,10 +7,13 @@ import {LoaderBarService} from '../../services/loader/loader-bar.service';
   styleUrls: ['./authorization.component.scss']
 })
 export class AuthorizationComponent implements OnInit {
+  isLoading: boolean;
 
   constructor(public loader: LoaderBarService) { }
 
   ngOnInit(): void {
+    this.isLoading = this.loader.getLoading();
+
   }
 
 }

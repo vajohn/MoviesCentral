@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LoaderBarService} from '../../services/loader/loader-bar.service';
 import {AuthService} from '../../services/auth/auth.service';
 
@@ -8,10 +8,13 @@ import {AuthService} from '../../services/auth/auth.service';
   styleUrls: ['./default.component.scss']
 })
 export class DefaultComponent implements OnInit {
+  isLoading: boolean;
 
-  constructor(public loader: LoaderBarService, public authService: AuthService) { }
+  constructor(public loader: LoaderBarService, public authService: AuthService) {
+  }
 
   ngOnInit(): void {
-  console.log('done', this.authService.currentUserValue);  }
+    this.isLoading = this.loader.getLoading();
+  }
 
 }
